@@ -14,10 +14,10 @@
    ============================================ */
 
 .back-btn {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  border: 1px solid rgba(107, 27, 61, 0.2);
+  color: var(--color-primary);
   padding: 12px 24px;
   border-radius: 12px;
   cursor: pointer;
@@ -31,10 +31,10 @@
 }
 
 .back-btn:hover {
-  background: rgba(102, 126, 234, 0.2);
-  border-color: rgba(102, 126, 234, 0.5);
+  background: rgba(107, 27, 61, 0.1);
+  border-color: rgba(107, 27, 61, 0.5);
   transform: translateX(-5px);
-  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 4px 20px rgba(107, 27, 61, 0.3);
 }
 
 /* ============================================
@@ -76,24 +76,25 @@
 .main-image-box {
   width: 100%;
   height: 600px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(107, 27, 61, 0.1);
   border-radius: 20px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(107, 27, 61, 0.15);
   transition: all 0.4s ease;
   transform-style: preserve-3d;
   perspective: 1000px;
+  cursor: zoom-in;
 }
 
 .main-image-box:hover {
   transform: scale(1.02) rotateY(2deg);
   box-shadow:
-    0 25px 80px rgba(102, 126, 234, 0.4),
-    0 0 60px rgba(118, 75, 162, 0.3);
-  border-color: rgba(102, 126, 234, 0.5);
+    0 25px 80px rgba(107, 27, 61, 0.3),
+    0 0 60px rgba(232, 165, 184, 0.2);
+  border-color: rgba(107, 27, 61, 0.3);
 }
 
 .main-image-box::before {
@@ -105,7 +106,7 @@
   bottom: 0;
   background: linear-gradient(180deg,
       transparent 0%,
-      rgba(15, 15, 35, 0.2) 100%);
+      rgba(107, 27, 61, 0.05) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -121,6 +122,125 @@
   transform: scale(1.1);
 }
 
+/* ⭐ FULLSCREEN IMAGE VIEWER - Flipkart Style */
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: zoom-out;
+  animation: fadeInOverlay 0.3s ease;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fullscreen-img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 8px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ARROW BUTTONS for Desktop */
+.arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.arrow-btn:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(107, 27, 61, 0.5);
+}
+
+.arrow-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.left-arrow {
+  left: 20px;
+}
+
+.right-arrow {
+  right: 20px;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10000;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn:hover {
+  background: #ef4444;
+  color: white;
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+}
+
+/* IMAGE COUNTER */
+.image-counter {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-primary);
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+}
+
 /* ============================================
    THUMBNAIL ROW
    ============================================ */
@@ -131,7 +251,7 @@
   overflow-x: auto;
   padding: 0.5rem 0;
   scrollbar-width: thin;
-  scrollbar-color: rgba(102, 126, 234, 0.5) rgba(255, 255, 255, 0.05);
+  scrollbar-color: rgba(107, 27, 61, 0.5) rgba(255, 255, 255, 0.05);
 }
 
 .thumbnail-row::-webkit-scrollbar {
@@ -144,7 +264,7 @@
 }
 
 .thumbnail-row::-webkit-scrollbar-thumb {
-  background: linear-gradient(90deg, #667eea, #764ba2);
+  background: var(--gradient-primary);
   border-radius: 3px;
 }
 
@@ -154,23 +274,23 @@
   object-fit: cover;
   border-radius: 12px;
   cursor: pointer;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(107, 27, 61, 0.1);
   transition: all 0.3s ease;
   flex-shrink: 0;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .thumb:hover {
   transform: translateY(-5px) scale(1.05);
-  border-color: rgba(102, 126, 234, 0.5);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+  border-color: rgba(107, 27, 61, 0.5);
+  box-shadow: 0 8px 20px rgba(107, 27, 61, 0.3);
 }
 
 .thumb.active {
-  border-color: #667eea;
+  border-color: var(--color-primary);
   box-shadow:
-    0 0 0 3px rgba(102, 126, 234, 0.3),
-    0 8px 20px rgba(102, 126, 234, 0.4);
+    0 0 0 3px rgba(107, 27, 61, 0.3),
+    0 8px 20px rgba(107, 27, 61, 0.4);
   transform: scale(1.1);
 }
 
@@ -182,19 +302,19 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(107, 27, 61, 0.1);
   border-radius: 20px;
   padding: 2.5rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px rgba(107, 27, 61, 0.15);
   animation: slideInRight 0.8s ease-out;
 }
 
 .title {
   font-size: 2.5rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  background: var(--gradient-elegant);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -207,11 +327,11 @@
 
   0%,
   100% {
-    filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.3));
+    filter: drop-shadow(0 0 10px rgba(107, 27, 61, 0.3));
   }
 
   50% {
-    filter: drop-shadow(0 0 20px rgba(118, 75, 162, 0.5));
+    filter: drop-shadow(0 0 20px rgba(232, 165, 184, 0.5));
   }
 }
 
@@ -259,25 +379,21 @@
    ============================================ */
 
 .price-box {
-  background: rgba(102, 126, 234, 0.1);
-  border: 1px solid rgba(102, 126, 234, 0.3);
+  background: rgba(107, 27, 61, 0.08);
+  border: 1px solid rgba(107, 27, 61, 0.3);
   border-radius: 16px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 8px 30px rgba(107, 27, 61, 0.15);
 }
 
 .price {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--color-primary);
   margin: 0;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .mrp {
@@ -305,28 +421,28 @@
 
 .info-section h3 {
   font-size: 1.2rem;
-  color: #fff;
+  color: var(--color-primary);
   margin: 1rem 0 0.5rem 0;
   font-weight: 700;
   font-family: 'Inter', sans-serif;
 }
 
 .size-box {
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(102, 126, 234, 0.5);
+  background: rgba(107, 27, 61, 0.08);
+  border: 2px solid rgba(107, 27, 61, 0.3);
   border-radius: 12px;
   padding: 12px 24px;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-primary);
   width: fit-content;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .size-box:hover {
-  background: rgba(102, 126, 234, 0.2);
+  background: rgba(107, 27, 61, 0.15);
   transform: scale(1.05);
-  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 20px rgba(107, 27, 61, 0.4);
 }
 
 .color-select {
@@ -341,15 +457,15 @@
   object-fit: cover;
   border-radius: 12px;
   cursor: pointer;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(107, 27, 61, 0.1);
   transition: all 0.3s ease;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.95);
 }
 
 .color-thumb:hover {
   transform: scale(1.15) rotate(5deg);
-  border-color: rgba(102, 126, 234, 0.5);
-  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  border-color: rgba(107, 27, 61, 0.5);
+  box-shadow: 0 8px 20px rgba(107, 27, 61, 0.4);
 }
 
 /* ============================================
@@ -450,6 +566,40 @@
   .color-thumb {
     width: 60px;
     height: 60px;
+  }
+
+  /* Mobile Fullscreen Controls */
+  .arrow-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .left-arrow {
+    left: 10px;
+  }
+
+  .right-arrow {
+    right: 10px;
+  }
+
+  .close-btn {
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .image-counter {
+    bottom: 20px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .fullscreen-img {
+    max-width: 95%;
+    max-height: 95%;
   }
 }
 
