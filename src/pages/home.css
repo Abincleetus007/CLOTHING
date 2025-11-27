@@ -1,0 +1,525 @@
+/* ============================================
+   HOME PAGE - PRODUCT GRID WITH 3D EFFECTS
+   ============================================ */
+
+.home-layout {
+  align-items: start;
+}
+
+.home-content {
+  padding-top: 0;
+}
+
+/* ============================================
+   PRODUCT GRID
+   ============================================ */
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  align-items: start;
+}
+
+/* ============================================
+   PRODUCT CARD - 3D EFFECTS
+   ============================================ */
+
+.lr-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  animation: cardFadeIn 0.6s ease-out backwards;
+}
+
+/* Stagger animation for cards */
+.lr-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.lr-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.lr-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.lr-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.lr-card:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+.lr-card:nth-child(6) {
+  animation-delay: 0.6s;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(50px) rotateX(-10deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+/* Hover effect with 3D transform */
+.lr-card:hover {
+  transform: translateY(-15px) scale(1.03) rotateX(2deg);
+  box-shadow:
+    0 20px 60px rgba(102, 126, 234, 0.3),
+    0 0 40px rgba(118, 75, 162, 0.2),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  border-color: rgba(102, 126, 234, 0.5);
+}
+
+/* Glow effect on hover */
+.lr-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.lr-card:hover::before {
+  opacity: 1;
+}
+
+/* Shine effect */
+.lr-card::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 70%);
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+  pointer-events: none;
+}
+
+.lr-card:hover::after {
+  top: 100%;
+  left: 100%;
+}
+
+/* ============================================
+   CARD BADGE
+   ============================================ */
+
+.card-badge {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1rem;
+  box-shadow:
+    0 4px 15px rgba(102, 126, 234, 0.4),
+    0 0 20px rgba(118, 75, 162, 0.3);
+  z-index: 10;
+  color: #fff;
+  transition: all 0.3s ease;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow:
+      0 4px 15px rgba(102, 126, 234, 0.4),
+      0 0 20px rgba(118, 75, 162, 0.3);
+  }
+
+  50% {
+    transform: scale(1.1);
+    box-shadow:
+      0 6px 20px rgba(102, 126, 234, 0.6),
+      0 0 30px rgba(118, 75, 162, 0.5);
+  }
+}
+
+.lr-card:hover .card-badge {
+  transform: rotate(360deg) scale(1.15);
+}
+
+/* ============================================
+   PRODUCT IMAGE
+   ============================================ */
+
+.lr-img {
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.lr-img::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(15, 15, 35, 0.3) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.lr-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: brightness(0.95);
+}
+
+.lr-card:hover .lr-img img {
+  transform: scale(1.15) rotate(2deg);
+  filter: brightness(1.05);
+}
+
+/* ============================================
+   OVERLAY ELEMENTS
+   ============================================ */
+
+.overlay-title {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 12px 16px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.lr-card:hover .overlay-title {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.overlay-text {
+  font-size: 0.9rem;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   RATING BOX
+   ============================================ */
+
+.rating-box {
+  position: absolute;
+  left: 20px;
+  bottom: 65px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+  color: #fff;
+  z-index: 5;
+  transform: translateX(-10px);
+  opacity: 0;
+  transition: all 0.4s ease 0.1s;
+}
+
+.lr-card:hover .rating-box {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.rating-star {
+  color: #fbbf24;
+  font-size: 1.1rem;
+  filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.5));
+}
+
+/* ============================================
+   BRAND TAG
+   ============================================ */
+
+.brand-tag {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 35px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  z-index: 5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.4s ease 0.2s;
+}
+
+.lr-card:hover .brand-tag {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ============================================
+   CARD FOOTER (PRICE & ACTIONS)
+   ============================================ */
+
+.card-footer {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: rgba(15, 15, 35, 0.8);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px 16px;
+  z-index: 6;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Price Section */
+.price-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.price-now {
+  font-weight: 800;
+  color: #fff;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.price-mrp {
+  text-decoration: line-through;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+}
+
+.price-save {
+  color: #10b981;
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* ============================================
+   ACTION ICONS
+   ============================================ */
+
+.icons-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.icon-btn:hover::before {
+  width: 100%;
+  height: 100%;
+}
+
+.icon-btn.heart {
+  color: #ef4444;
+}
+
+.icon-btn.heart:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+  transform: scale(1.2);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+.icon-btn.whatsapp {
+  color: #25D366;
+  text-decoration: none;
+}
+
+.icon-btn.whatsapp:hover {
+  background: rgba(37, 211, 102, 0.2);
+  border-color: rgba(37, 211, 102, 0.5);
+  transform: scale(1.2);
+  box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1400px) {
+  .home-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .lr-img {
+    height: 380px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .home-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .lr-img {
+    height: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .lr-img {
+    height: 450px;
+  }
+
+  .card-badge {
+    width: 38px;
+    height: 38px;
+    font-size: 0.9rem;
+  }
+
+  .overlay-title {
+    left: 16px;
+    right: 16px;
+    bottom: 90px;
+  }
+
+  .rating-box {
+    left: 16px;
+    bottom: 60px;
+  }
+
+  .brand-tag {
+    left: 16px;
+    right: 16px;
+    bottom: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lr-img {
+    height: 400px;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .price-left {
+    flex-wrap: wrap;
+  }
+
+  .icons-right {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
