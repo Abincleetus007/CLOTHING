@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { PRODUCTS } from "../data/products";
 import "./home.css";
 
-const CATEGORIES = ["All", "Suits", "Tops", "Dresses", "Bottoms", "Kurtas", "Sarees"];
+const CATEGORIES = ["All", "Suits", "Tops", "churidar material", "Bottoms", "Kurtas", "Sarees"];
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState("All");
